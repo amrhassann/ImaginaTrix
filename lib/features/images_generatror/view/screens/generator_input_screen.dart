@@ -1,6 +1,7 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
 import 'package:ai_images_generator/features/images_generatror/controller/controller.dart';
+import 'package:ai_images_generator/features/images_generatror/view/screens/result_image.dart';
 import 'package:ai_images_generator/features/images_generatror/view/widgets/input_field.dart';
 import 'package:ai_images_generator/shared_widgets/network_images_slider.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,12 @@ class _Content extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 5),
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(
+                  ()=> ResultImage(imageUrl: "fuck u",),
+                transition: Transition.fadeIn,
+              );
+            },
             child: const Text(
               'Generate',
               style: TextStyle(fontSize: 17),
