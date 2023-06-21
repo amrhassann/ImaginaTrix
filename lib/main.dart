@@ -1,6 +1,7 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'features/images_generatror/view/screens/generator_input_screen.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData(
