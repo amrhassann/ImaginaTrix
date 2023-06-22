@@ -1,6 +1,6 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
-import 'package:ai_images_generator/features/images_generatror/controller/controller.dart';
+import 'package:ai_images_generator/features/images_generatror/controller/home_controller.dart';
 import 'package:ai_images_generator/features/images_generatror/view/screens/result_image.dart';
 import 'package:ai_images_generator/features/images_generatror/view/widgets/input_field.dart';
 import 'package:ai_images_generator/shared_widgets/network_images_slider.dart';
@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     Get.put(MyController());
@@ -26,7 +24,7 @@ class HomePage extends StatelessWidget {
               'https://dallery.gallery/wp-content/uploads/2022/08/Midjourney-classic-AI-art-style-1-585x1024.jpg'
             ],
           ),
-          const _Content(),
+          _Content(),
         ],
       ),
     );
@@ -34,7 +32,9 @@ class HomePage extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  const _Content();
+  final MyController controller = Get.find();
+
+  _Content();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,6 @@ class _Content extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: RichText(
-
             text: const TextSpan(
               style: TextStyle(
                 color: Colors.white,
@@ -74,11 +73,8 @@ class _Content extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
-
               ],
             ),
-
           ),
         ),
         const SizedBox(height: 35),
@@ -125,14 +121,11 @@ class _Content extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              Get.to(
-                  ()=> ResultImage(imageUrl: "fuck u",),
-                transition: Transition.fadeIn,
-              );
+              controller.navigateToResult();
             },
             child: const Text(
               'Generate',
