@@ -15,19 +15,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: ColorsManager.primary),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-        ),
-        elevatedButtonTheme:  ElevatedButtonThemeData(
-          style: ButtonStyle(
+      home: const HomePage(),
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: ColorsManager.scaffoldBg,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorsManager.appBarBg,
+            elevation: 0.0,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
               ColorsManager.primary.withOpacity(.8),
             ),
-            padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+            padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(
@@ -35,9 +36,7 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
-          )
-        )
-      ),
+          ))),
     );
   }
 }
