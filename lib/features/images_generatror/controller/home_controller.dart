@@ -10,10 +10,10 @@ class MyController extends GetxController {
   ];
 
   List<String> images = [
-    'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs3/306830510/original/a6330ab0e17b52eb88c6ae46e34bbea3c62496fd/make-an-art-for-you-using-midjourney.png',
-    'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/297877722/original/4a20d40005609fc966525447c683827e6c1c8ce1/create-a-realistic-3d-image-using-midjourney-ai.png',
-    'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/297877722/original/4a20d40005609fc966525447c683827e6c1c8ce1/create-a-realistic-3d-image-using-midjourney-ai.png',
-  ];
+    'https://mj-gallery.com/e36c80ef-bcbf-4b91-a5c2-d1d0f38f728d/grid_0_640_N.webp',
+    'https://mj-gallery.com/63bd4685-9667-44e4-9596-7f7ed2df2c55/grid_0_640_N.webp',
+    'https://dallery.gallery/wp-content/uploads/2022/08/Midjourney-classic-AI-art-style-1-585x1024.jpg',
+   ];
 
   final TextEditingController promptController = TextEditingController();
 

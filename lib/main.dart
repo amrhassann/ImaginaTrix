@@ -17,6 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomePage(),
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          iconTheme: IconThemeData(color: ColorsManager.primary),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+        ),
         elevatedButtonTheme:  ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(
