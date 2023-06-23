@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               'https://dallery.gallery/wp-content/uploads/2022/08/Midjourney-classic-AI-art-style-1-585x1024.jpg'
             ],
           ),
-          _Content(),
+          const _Content(),
         ],
       ),
     );
@@ -33,63 +33,63 @@ class HomePage extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  final MyController controller = Get.find();
 
-  _Content();
+  const _Content();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: RichText(
-            text: const TextSpan(
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                  text: 'AI Image Generators That Make You 10x More',
-                ),
-                TextSpan(
-                  text: ' Creative ',
-                  style: TextStyle(
-                    color: ColorsManager.primary,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextSpan(
-                  text: 'And ',
-                ),
-                TextSpan(
-                  text: 'Productive',
-                  style: TextStyle(
-                    color: ColorsManager.primary,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 35),
-        Row(
+    return GetBuilder<MyController>(
+      builder: (controller) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-             Expanded(
-              child: InputField(controller: controller.promptController),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: RichText(
+                text: const TextSpan(
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'AI Image Generators That Make You 10x More',
+                    ),
+                    TextSpan(
+                      text: ' Creative ',
+                      style: TextStyle(
+                        color: ColorsManager.primary,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'And ',
+                    ),
+                    TextSpan(
+                      text: 'Productive',
+                      style: TextStyle(
+                        color: ColorsManager.primary,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            const SizedBox(
-              width: 5,
-            ),
-            GetBuilder<MyController>(
-              builder: (controller) {
-                return Container(
+            const SizedBox(height: 35),
+            Row(
+              children: [
+                 Expanded(
+                  child: InputField(controller: controller.promptController),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+
+                Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(.7),
@@ -115,27 +115,29 @@ class _Content extends StatelessWidget {
                       onChanged: (newValue) => controller.changeMenu(newValue!),
                     ),
                   ),
-                );
-              },
+                ),
+              ],
             ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  if(!controller.loading){
+                    controller.generateImages();
+                  }
+                },
+                child: Text(
+                  controller.loading?"Generating...":'Generate',
+                  style: const TextStyle(fontSize: 17),
+                ),
+              ),
+            ),
+            const SizedBox(height: 50),
           ],
-        ),
-        const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              controller.navigateToResult();
-            },
-            child: const Text(
-              'Generate',
-              style: TextStyle(fontSize: 17),
-            ),
-          ),
-        ),
-        const SizedBox(height: 50),
-      ],
+        );
+      }
     );
   }
 }
