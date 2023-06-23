@@ -9,9 +9,11 @@ class CreateImageParams {
     this.n = 3,
   });
 
-
-  Map<String,dynamic> toJson(){
-    Map<String,dynamic> jsonData = {};
-    return jsonData;
+  Map<String, dynamic> toJson() {
+    return {
+      "prompt": prompt,
+      "size": size,
+      "n": n,
+    };
   }
 }
