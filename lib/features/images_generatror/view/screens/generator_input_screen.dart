@@ -1,7 +1,6 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
 import 'package:ai_images_generator/features/images_generatror/controller/home_controller.dart';
-import 'package:ai_images_generator/features/images_generatror/view/screens/result_image.dart';
 import 'package:ai_images_generator/features/images_generatror/view/widgets/input_field.dart';
 import 'package:ai_images_generator/shared_widgets/network_images_slider.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +79,8 @@ class _Content extends StatelessWidget {
         const SizedBox(height: 35),
         Row(
           children: [
-            const Expanded(
-              child: InputField(),
+             Expanded(
+              child: InputField(controller: controller.promptController),
             ),
             const SizedBox(
               width: 5,
@@ -103,13 +102,13 @@ class _Content extends StatelessWidget {
                       items: controller.items
                           .map(
                             (String value) => DropdownMenuItem(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          )
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      )
                           .toList(),
                       onChanged: (newValue) => controller.changeMenu(newValue!),
                     ),
