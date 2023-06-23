@@ -6,12 +6,17 @@ ErrorModel handleError(int statusCode) {
       statusCode: statusCode,
       errorMessage: 'Not Found',
     );
-  } else if (statusCode >=500){
+  } else if (statusCode >= 500) {
     return ErrorModel(
       statusCode: statusCode,
       errorMessage: 'Server Error, please try again later',
     );
-  }else{
+  } else if (statusCode == 401) {
+    return ErrorModel(
+      statusCode: statusCode,
+      errorMessage: 'Session Closed, please try again later until we handle authentication',
+    );
+  } else {
     return ErrorModel(
       statusCode: 1,
       errorMessage: 'Error, please try again later',
