@@ -28,13 +28,14 @@ class CreateImageRemoteDataSource {
       },
           (body) {
 
-            List<Map> _body = body as List<Map<dynamic, dynamic>>;
-
+            Map bodyAsMap = body as Map;
+            List data = bodyAsMap['data'];
+            List<String> images = data.map((e) => e['url'].toString()).toList();
 
 
         requestResult = RequestResult(
           containError: false,
-          data: _body.map((e) => e['url'].toString()).toList(),
+          data: images,
         );
       },
     );
