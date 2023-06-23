@@ -1,4 +1,4 @@
-import 'package:ai_images_generator/core/manager/colors_manager.dart';
+import 'package:ai_images_generator/core/utils/functions.dart';
 import 'package:ai_images_generator/features/images_generatror/controller/result_image_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,24 +30,29 @@ class _ResultImageState extends State<ResultImage> {
           appBar: AppBar(),
           body: SizedBox(
             height: Get.height,
-            child: Stack(
-              alignment: AlignmentDirectional.bottomCenter,
+            child: Column(
               children: [
-                Center(
-                    child: Image.network(
-                  cc.selectedImage,
-                  fit: BoxFit.cover,
-                )),
+                Expanded(
+                  child: Image.network(
+                    cc.selectedImage,
+                    fit: BoxFit.contain,
+                    loadingBuilder: (c,s,x)=>imageNetworkLoadingBuilder(c,s,x),
+
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Container(
                   margin: const EdgeInsets.only(bottom: 10),
                   height: 140,
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: 3,
                     itemBuilder: (c, i) {
                       final bool isSelected =
                           cc.images[i] == cc.selectedImage;
                       return InkWell(
+                        borderRadius: BorderRadius.circular(20),
                         onTap: () {
                           cc.changeSelectedImage(i);
                         },
@@ -66,6 +71,7 @@ class _ResultImageState extends State<ResultImage> {
                                   ? Colors.black.withOpacity(.6)
                                   : null,
                               colorBlendMode: BlendMode.darken,
+                              loadingBuilder: (c,s,x)=>imageNetworkLoadingBuilder(c,s,x),
                             ),
                           ),
                         ),
