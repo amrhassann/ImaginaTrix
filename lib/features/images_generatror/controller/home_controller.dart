@@ -1,32 +1,73 @@
+import 'package:ai_images_generator/core/manager/colors_manager.dart';
+import 'package:ai_images_generator/features/images_generatror/data/data_sources/remote_data_source.dart';
+import 'package:ai_images_generator/features/images_generatror/data/models/create_image_params.dart';
 import 'package:ai_images_generator/features/images_generatror/view/screens/result_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
+  ///[Inputs_handling]
   List<String> items = [
-    '1024 x 768',
-    '1280 x 1024',
-    '1920 x 1080',
+    '256x256',
+    '512x512',
+    '1024x1024',
   ];
 
-  List<String> images = [
-    'https://mj-gallery.com/e36c80ef-bcbf-4b91-a5c2-d1d0f38f728d/grid_0_640_N.webp',
-    'https://mj-gallery.com/63bd4685-9667-44e4-9596-7f7ed2df2c55/grid_0_640_N.webp',
-    'https://dallery.gallery/wp-content/uploads/2022/08/Midjourney-classic-AI-art-style-1-585x1024.jpg',
-   ];
-
   final TextEditingController promptController = TextEditingController();
+  String selectedValue = '1024x1024';
 
-  String selectedValue = '1280 x 1024';
   void changeMenu(String value) {
     selectedValue = value;
     update();
   }
 
+  ///[Outputs_handling]
+  List<String> images = [];
+
   navigateToResult() {
     Get.to(
-          () => ResultImage(images: images),
+      () => ResultImage(images: images),
       transition: Transition.fadeIn,
     );
+  }
+
+  final CreateImageRemoteDataSource _source = CreateImageRemoteDataSource();
+  bool loading = false;
+
+  changeLoadingValue() {
+    loading = !loading;
+    update();
+  }
+
+  CreateImageParams _generateParams() {
+    return CreateImageParams(
+      prompt: promptController.text,
+      size: selectedValue,
+    );
+  }
+
+  generateImages() async {
+    changeLoadingValue();
+    final result = await _source.execute(
+      _generateParams(),
+    );
+    changeLoadingValue();
+
+    if (!result.containError) {
+      update();
+      if (result.data != null) {
+        images = result.data!;
+        navigateToResult();
+      }
+    } else {
+      Get.snackbar(
+        "",
+        result.errorMessage!,
+        snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 6),
+        backgroundColor: ColorsManager.scaffoldBg,
+        colorText: Colors.white
+      );
+    }
   }
 }
