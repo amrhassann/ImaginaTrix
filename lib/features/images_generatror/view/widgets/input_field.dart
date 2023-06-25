@@ -1,3 +1,4 @@
+import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,10 @@ class InputField extends StatelessWidget {
         controller: controller,
         style: TextStyle(color: Colors.white),
         maxLines: 5,
+
+        textInputAction: TextInputAction.done,
+
+        cursorColor: ColorsManager.primary,
         decoration: const InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
