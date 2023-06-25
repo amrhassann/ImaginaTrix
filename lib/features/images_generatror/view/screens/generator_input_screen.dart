@@ -3,7 +3,7 @@ import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
 import 'package:ai_images_generator/features/images_generatror/controller/home_controller.dart';
 import 'package:ai_images_generator/features/images_generatror/view/widgets/input_field.dart';
-import 'package:ai_images_generator/shared_widgets/network_images_slider.dart';
+import 'package:ai_images_generator/shared_widgets/faded_images_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,9 +18,12 @@ class HomePage extends StatelessWidget {
       body: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
-          LocalImagesSlider(
+          SizedBox(
             height: Get.height,
-            images: AssetsManager.homeSliderImages,
+            child: ImageSlider(
+              images: AssetsManager.homeSliderImages,
+              fit: BoxFit.cover,
+            ),
           ),
           const _Content(),
         ],
@@ -53,6 +56,7 @@ class _Content extends StatelessWidget {
           builder: (controller) {
             return Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -91,44 +95,36 @@ class _Content extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 35),
-                Row(
-                  children: [
-                     Expanded(
-                      child: InputField(controller: controller.promptController),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(.7),
-                          borderRadius: BorderRadius.circular(kBorderRadius)),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          dropdownColor: Colors.grey,
-                          borderRadius: BorderRadius.circular(
-                            kBorderRadius,
-                          ),
-                          value: controller.selectedValue,
-                          items: controller.items
-                              .map(
-                                (String value) => DropdownMenuItem(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          )
-                              .toList(),
-                          onChanged: (newValue) => controller.changeMenu(newValue!),
-                        ),
+                InputField(controller: controller.promptController),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.0),
+                      borderRadius: BorderRadius.circular(kBorderRadius)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      dropdownColor: Colors.black54,
+                      borderRadius: BorderRadius.circular(
+                        kBorderRadius,
                       ),
+                      value: controller.selectedValue,
+                      items: controller.items
+                          .map(
+                            (String value) => DropdownMenuItem(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: const TextStyle(fontSize: 14,color: Colors.grey),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                      onChanged: (newValue) => controller.changeMenu(newValue!),
                     ),
-                  ],
+                  ),
                 ),
+
                 const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
