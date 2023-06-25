@@ -1,5 +1,5 @@
 import 'package:ai_images_generator/core/utils/functions.dart';
-import 'package:ai_images_generator/features/images_generatror/controller/result_image_controller.dart';
+import 'package:ai_images_generator/features/result_images/result_image_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +27,15 @@ class _ResultImageState extends State<ResultImage> {
     return GetBuilder<ResultImageController>(
       builder: (cc) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () =>downloadImage(controller.selectedImage),
+                icon: const Icon(Icons.download_rounded,size: 25,),
+
+              ),
+            ],
+          ),
           body: SizedBox(
             height: Get.height,
             child: Column(
