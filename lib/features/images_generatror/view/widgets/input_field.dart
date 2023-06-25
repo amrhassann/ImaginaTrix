@@ -20,11 +20,15 @@ class InputField extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       child: TextFormField(
         controller: controller,
+        maxLines: 10,
         decoration: const InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             hintText: 'eg \'A Monkey On The Moon\'',
-            hintStyle: TextStyle(fontSize: 15)),
+            hintStyle: TextStyle(fontSize: 15),
+
+
+        ),
       ),
     );
   }
