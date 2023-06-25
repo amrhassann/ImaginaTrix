@@ -1,8 +1,24 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-imageSaver(String imageUrl){
+import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
+
+downloadImage(String imageUrl)async{
+  try {
+    await GallerySaver.saveImage(imageUrl);
+    log('image saved successfully');
+    // successSnackBar(msg: 'Image saved successfully');
+  } catch (e) {
+    print(e);
+    // errSnackBar('Failed to save image');
+  }
 
 }
+
+
+
+
+
 imageNetworkLoadingBuilder(BuildContext context, Widget child,
     ImageChunkEvent? loadingProgress) {
 
