@@ -13,20 +13,20 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(.7),
+          color: Colors.white.withOpacity(.1),
           borderRadius: BorderRadius.circular(
             kBorderRadius,
           )),
       margin: const EdgeInsets.all(5),
       child: TextFormField(
         controller: controller,
-        maxLines: 10,
+        style: TextStyle(color: Colors.white),
+        maxLines: 5,
         decoration: const InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             hintText: 'eg \'A Monkey On The Moon\'',
-            hintStyle: TextStyle(fontSize: 15),
-
+            hintStyle: TextStyle(fontSize: 15,color: Colors.grey),
 
         ),
       ),
