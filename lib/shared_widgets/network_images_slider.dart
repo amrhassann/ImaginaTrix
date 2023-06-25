@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class NetworkImagesSlider extends StatefulWidget {
-  const NetworkImagesSlider({
+class LocalImagesSlider extends StatefulWidget {
+  const LocalImagesSlider({
     Key? key,
     required this.images,
     required this.height,
@@ -13,10 +13,10 @@ class NetworkImagesSlider extends StatefulWidget {
   final double height;
 
   @override
-  State<NetworkImagesSlider> createState() => _NetworkImagesSliderState();
+  State<LocalImagesSlider> createState() => _LocalImagesSliderState();
 }
 
-class _NetworkImagesSliderState extends State<NetworkImagesSlider> {
+class _LocalImagesSliderState extends State<LocalImagesSlider> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +28,7 @@ class _NetworkImagesSliderState extends State<NetworkImagesSlider> {
             items: widget.images
                 .map((imageUrl) => InkWell(
                     onTap: () {},
-                    child: Image.network(
+                    child: Image.asset(
                       imageUrl,
                       fit: BoxFit.cover,
                       color: Colors.black.withOpacity(.5),
@@ -37,10 +37,12 @@ class _NetworkImagesSliderState extends State<NetworkImagesSlider> {
                 .toList(),
             options: CarouselOptions(
               height: double.infinity,
-              viewportFraction: 1.0,
+              viewportFraction: 1,
               autoPlay: true,
-                autoPlayAnimationDuration : const Duration(seconds: 2),
-              autoPlayCurve: Curves.ease
+                autoPlayAnimationDuration : const Duration(seconds: 5),
+              autoPlayInterval: const Duration(seconds: 10),
+              autoPlayCurve: Curves.ease,
+              clipBehavior: Clip.antiAliasWithSaveLayer
             ),
           ),
         ),
