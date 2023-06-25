@@ -1,7 +1,7 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/features/images_generatror/data/data_sources/remote_data_source.dart';
 import 'package:ai_images_generator/features/images_generatror/data/models/create_image_params.dart';
-import 'package:ai_images_generator/features/images_generatror/view/screens/result_image.dart';
+import 'package:ai_images_generator/features/result_images/result_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
