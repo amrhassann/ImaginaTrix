@@ -1,10 +1,13 @@
 import 'package:ai_images_generator/core/manager/colors_manager.dart';
 import 'package:ai_images_generator/core/manager/constants.dart';
+import 'package:ai_images_generator/core/utils/hive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'features/images_generatror/view/screens/generator_input_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await HiveHelper.hiveInit();
   runApp(const MyApp());
 }
 
