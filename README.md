@@ -1,16 +1,10 @@
-# ai_images_generator
+## ImaginaTrix
 
-A new Flutter project.
+
+ai images generator using https://api.openai.com/v1/images
+
+
+
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### You just have to replace the api_Key in the "core/networking/api_constants.dart" file with your own api_Key

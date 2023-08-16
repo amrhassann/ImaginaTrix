@@ -7,7 +7,7 @@ import 'features/images_generatror/view/screens/generator_input_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await HiveHelper.hiveInit();
+  // await HiveHelper.hiveInit();
   runApp(const MyApp());
 }
 

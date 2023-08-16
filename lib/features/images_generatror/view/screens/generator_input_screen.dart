@@ -49,14 +49,14 @@ class _HomePageState extends State<HomePage> {
                   )),
 
               actions: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                  child: Text(
-                    'History',
-                    style: TextStyle(
-                        color: Colors.grey.shade300, fontWeight: FontWeight.bold),
-                  ),
-                )
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                //   child: Text(
+                //     'History',
+                //     style: TextStyle(
+                //         color: Colors.grey.shade300, fontWeight: FontWeight.bold),
+                //   ),
+                // )
               ],
             ),
             body: _Content(),
@@ -68,7 +68,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _Content extends StatelessWidget {
-  const _Content();
+   _Content();
+  final _formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,96 +79,102 @@ class _Content extends StatelessWidget {
       return Align(
         alignment: Alignment.bottomCenter,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: RichText(
-                  text: const TextSpan(
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'AI Image Generators That Make You 10x More',
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
                       ),
-                      TextSpan(
-                        text: ' Creative ',
-                        style: TextStyle(
-                          color: ColorsManager.primary,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'AI Image Generators That Make You 10x More',
                         ),
-                      ),
-                      TextSpan(
-                        text: 'And ',
-                      ),
-                      TextSpan(
-                        text: 'Productive',
-                        style: TextStyle(
-                          color: ColorsManager.primary,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 35),
-              InputField(controller: controller.promptController),
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(.0),
-                    borderRadius: BorderRadius.circular(kBorderRadius)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    dropdownColor: Colors.black54,
-                    borderRadius: BorderRadius.circular(
-                      kBorderRadius,
-                    ),
-                    value: controller.selectedValue,
-                    items: controller.items
-                        .map(
-                          (String value) => DropdownMenuItem(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.grey),
-                            ),
+                        TextSpan(
+                          text: ' Creative ',
+                          style: TextStyle(
+                            color: ColorsManager.primary,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
                           ),
-                        )
-                        .toList(),
-                    onChanged: (newValue) => controller.changeMenu(newValue!),
+                        ),
+                        TextSpan(
+                          text: 'And ',
+                        ),
+                        TextSpan(
+                          text: 'Productive',
+                          style: TextStyle(
+                            color: ColorsManager.primary,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (!controller.loading) {
-                      controller.generateImages();
-                    }
-                  },
-                  child: Text(
-                    controller.loading ? "Generating..." : 'Generate',
-                    style: const TextStyle(fontSize: 17),
+                const SizedBox(height: 35),
+                InputField(controller: controller.promptController,requiredField: true,),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.0),
+                      borderRadius: BorderRadius.circular(kBorderRadius)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      dropdownColor: Colors.black54,
+                      borderRadius: BorderRadius.circular(
+                        kBorderRadius,
+                      ),
+                      value: controller.selectedValue,
+                      items: controller.items
+                          .map(
+                            (String value) => DropdownMenuItem(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(
+                                    fontSize: 14, color: Colors.grey),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (newValue) => controller.changeMenu(newValue!),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 50),
-            ],
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (!controller.loading) {
+                        if(_formKey.currentState!.validate()){
+                          controller.generateImages();
+
+                        }
+                      }
+                    },
+                    child: Text(
+                      controller.loading ? "Generating..." : 'Generate',
+                      style: const TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 50),
+              ],
+            ),
           ),
         ),
       );

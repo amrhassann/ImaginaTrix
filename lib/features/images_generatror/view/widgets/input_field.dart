@@ -6,10 +6,12 @@ class InputField extends StatelessWidget {
   const InputField({
     super.key,
     required this.controller,
+    this.requiredField = false
   });
 
   final TextEditingController controller;
 
+  final bool requiredField;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,13 +27,20 @@ class InputField extends StatelessWidget {
         maxLines: 5,
 
         textInputAction: TextInputAction.done,
-
+        validator: requiredField
+            ? (value) {
+          if (value == null || value.isEmpty) {
+            return 'Required field';
+          }
+          return null;
+        }
+            : null,
         cursorColor: ColorsManager.primary,
-        decoration: const InputDecoration(
+        decoration:  InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             hintText: 'eg \'A Monkey On The Moon\'',
-            hintStyle: TextStyle(fontSize: 15,color: Colors.grey),
+            hintStyle: TextStyle(fontSize: 15,color: Colors.grey.shade300),
 
         ),
       ),

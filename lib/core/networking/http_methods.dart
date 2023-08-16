@@ -17,10 +17,12 @@ abstract class BaseHttpClient{
 class MyHttpClient  extends ApiConstants implements BaseHttpClient{
 
   @override
-  Future<Either<ErrorModel, dynamic>> post(RequestParams params) async {
+  Future<Either<ErrorModel, dynamic>> post(RequestParams params,{bool debug = true}) async {
     try {
-      log("TO: _____________________________________________________");
-      log(params.url.toString());
+      if(debug){
+        log("TO: _____________________________________________________");
+        log(params.url.toString());
+      }
       http.Response response = await http
           .post(
         Uri.parse(params.url),
@@ -29,14 +31,17 @@ class MyHttpClient  extends ApiConstants implements BaseHttpClient{
         encoding: Encoding.getByName("utf-8"),
       );
 
-      log("REQUEST IS: _____________________________________________________");
-      log(params.body.toString());
-      log("_____________________________________________________");
-      log("STATUS CODE IS: ${response.statusCode}");
-      log("_____________________________________________________");
-      log("RESPONSE IS: _____________________________________________________");
-      log(response.body.toString());
-      log("_____________________________________________________");
+      if(debug){
+        log("REQUEST IS: _____________________________________________________");
+        log(params.body.toString());
+        log("_____________________________________________________");
+        log("STATUS CODE IS: ${response.statusCode}");
+        log("_____________________________________________________");
+        log("RESPONSE IS: _____________________________________________________");
+        log(response.body.toString());
+        log("_____________________________________________________");
+      }
+
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final body = jsonDecode(utf8.decode(response.bodyBytes));

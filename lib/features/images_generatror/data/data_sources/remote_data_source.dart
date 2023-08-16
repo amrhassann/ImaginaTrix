@@ -6,12 +6,14 @@ import 'package:ai_images_generator/features/images_generatror/data/models/creat
 
 class CreateImageRemoteDataSource {
   final BaseHttpClient _httpClient = MyHttpClient();
-
+  // final BaseGenerateImagesLocalDataSource _generateImagesLocalDataSource =
+  //     GenerateImagesLocalDataSource();
 
   Future<RequestResult<List<String>>> execute(CreateImageParams params) async {
     late RequestResult<List<String>> requestResult;
 
     final result = await _httpClient.post(
+
       RequestParams(
         url: ApiConstants.generateImage,
         body: params.toJson(),
@@ -19,24 +21,23 @@ class CreateImageRemoteDataSource {
     );
 
     result.fold(
-          (l) {
+      (l) {
         requestResult = RequestResult(
           containError: true,
           errorMessage: l.errorMessage,
           statusCode: l.statusCode,
         );
       },
-          (body) {
-
-            Map bodyAsMap = body as Map;
-            List data = bodyAsMap['data'];
-            List<String> images = data.map((e) => e['url'].toString()).toList();
-
+      (body) {
+        Map bodyAsMap = body as Map;
+        List data = bodyAsMap['data'];
+        List<String> images = data.map((e) => e['url'].toString()).toList();
 
         requestResult = RequestResult(
           containError: false,
           data: images,
         );
+
       },
     );
 
